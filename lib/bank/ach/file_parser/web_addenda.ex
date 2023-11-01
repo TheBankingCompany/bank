@@ -1,4 +1,4 @@
-defmodule Bank.Ach.FileParser.FileControl do
+defmodule Bank.Ach.FileParser.WebAddenda do
   import NimbleParsec
   import Bank.Ach.FileParser.Types
   import Bank.Ach.FileParser.Common
