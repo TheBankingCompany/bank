@@ -20,7 +20,8 @@ defmodule Bank.Ach.FileParser.IatBatchHeader do
     |> concat(effective_entry_date())
     |> concat(settlement_date())
     |> concat(originator_status_code())
-    |> concat(originating_dfi_identification()) # GO Identification
+    # GO Identification
+    |> concat(originating_dfi_identification())
     |> concat(batch_number())
   end
 
