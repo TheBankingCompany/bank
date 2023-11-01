@@ -26,7 +26,7 @@ defmodule Bank.Ach.FileParser.XckEntry do
 
   def receiving_dfi_identification() do
     chars(8)
-    |> tag(:rdfi_identification)
+    |> tag(:receiving_dfi_identification)
   end
 
   def check_digit() do
