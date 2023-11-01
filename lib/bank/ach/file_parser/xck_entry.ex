@@ -7,7 +7,7 @@ defmodule Bank.Ach.FileParser.XckEntry do
   def record() do
     record_type_code("6")
     |> concat(transaction_code())
-    |> concat(rdfi_identification())
+    |> concat(receiving_dfi_identification())
     |> concat(check_digit())
     |> concat(dfi_account_number())
     |> concat(amount())
@@ -24,7 +24,7 @@ defmodule Bank.Ach.FileParser.XckEntry do
     |> tag(:transaction_code)
   end
 
-  def rdfi_identification() do
+  def receiving_dfi_identification() do
     chars(8)
     |> tag(:rdfi_identification)
   end
