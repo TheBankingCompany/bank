@@ -36,4 +36,6 @@ defmodule Bank.Ach.FileParser do
   defparsec(:file_control, Bank.Ach.FileParser.FileControl.record())
   defparsec(:batch_header, Bank.Ach.FileParser.BatchHeader.record())
   defparsec(:batch_control, Bank.Ach.FileParser.BatchControl.record())
+  defparsec(:iat_batch_header, Bank.Ach.FileParser.IatBatchHeader.record())
+  #============================================================================
 end
