@@ -32,17 +32,6 @@ defmodule Bank.Ach.FileParser do
     end
   end
 
-  defparsec(:file_header, Bank.Ach.FileParser.FileHeader.record())
-  defparsec(:file_control, Bank.Ach.FileParser.FileControl.record())
-  defparsec(:batch_header, Bank.Ach.FileParser.BatchHeader.record())
-  defparsec(:batch_control, Bank.Ach.FileParser.BatchControl.record())
-  defparsec(:iat_batch_header, Bank.Ach.FileParser.IatBatchHeader.record())
-  defparsec(:adv_file_header, Bank.Ach.FileParser.AdvFileHeader.record())
-  defparsec(:adv_file_control, Bank.Ach.FileParser.AdvFileControl.record())
-  defparsec(:adv_batch_control, Bank.Ach.FileParser.AdvBatchControl.record())
-  defparsec(:adv_entry, Bank.Ach.FileParser.AdvEntry.record())
-  defparsec(:arc_entry, Bank.Ach.FileParser.ArcEntry.record())
-  defparsec(:boc_entry, Bank.Ach.FileParser.BocEntry.record())
   # ============================================================================
   defparsec(:web_addenda, Bank.Ach.FileParser.WebAddenda.record())
   defparsec(:xck_entry, Bank.Ach.FileParser.XckEntry.record())
