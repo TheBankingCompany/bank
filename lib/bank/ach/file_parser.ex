@@ -42,6 +42,7 @@ defmodule Bank.Ach.FileParser do
   defparsec(:adv_batch_control, Bank.Ach.FileParser.AdvBatchControl.record())
   defparsec(:adv_entry, Bank.Ach.FileParser.AdvEntry.record())
   defparsec(:arc_entry, Bank.Ach.FileParser.ArcEntry.record())
+  defparsec(:boc_entry, Bank.Ach.FileParser.BocEntry.record())
   # ============================================================================
   defparsec(:web_addenda, Bank.Ach.FileParser.WebAddenda.record())
   defparsec(:xck_entry, Bank.Ach.FileParser.XckEntry.record())
