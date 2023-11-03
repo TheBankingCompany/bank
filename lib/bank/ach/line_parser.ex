@@ -65,8 +65,16 @@ defmodule Bank.Ach.LineParser do
     value
   end
 
-  def cast!(value, :blank, _requirement) do
-    value
+  def cast!(value, type, requirement) when requirement in [:O, :ACH] do
+    if String.trim(value, " ") == "" do
+      nil
+    else
+      cast!(value, type, :M)
+    end
+  end
+
+  def cast!(_value, :blank, :NA) do
+    nil
   end
 
   def cast!(value, :routing_number, _requirement) do
