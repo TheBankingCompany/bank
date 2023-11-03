@@ -65,15 +65,35 @@ defmodule Bank.Ach.FileParser.LineParser do
     value
   end
 
-  def cast!(value, :string) do
+  def cast!(value, :blank) do
     value
   end
 
-  def cast!(value, :integer) do
+  def cast!(value, :routing_number) do
+    value
+  end
+
+  def cast!(value, :padded_routing_number) do
+    value
+  end
+
+  def cast!(value, :upper_az_numeric_09) do
+    value
+  end
+
+  def cast!(value, :alphameric) do
+    value
+  end
+
+  def cast!(value, :amount_in_cents) do
     String.to_integer(value)
   end
 
-  def cast!(value, :date) do
+  def cast!(value, :numeric) do
+    String.to_integer(value)
+  end
+
+  def cast!(value, :yymmdd) do
     Date.new!(
       2000 + String.to_integer(String.slice(value, 0, 2)),
       String.to_integer(String.slice(value, 2, 2)),
@@ -81,7 +101,7 @@ defmodule Bank.Ach.FileParser.LineParser do
     )
   end
 
-  def cast!(value, :time) do
+  def cast!(value, :hhmm) do
     Time.new!(
       String.to_integer(String.slice(value, 0, 2)),
       String.to_integer(String.slice(value, 2, 2)),
