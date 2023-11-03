@@ -40,8 +40,8 @@ defmodule Bank.Ach.LineParser do
     }
   end
 
-  def field!(line, name, length, type) do
-    put(line, name, read!(line, length) |> maybe_cast!(type, line.opts[:cast]))
+  def field!(line, name, requirement, type, length) do
+    put(line, name, read!(line, length) |> maybe_cast!(type, requirement, line.opts[:cast]))
     |> advance!(length)
   end
 
@@ -57,43 +57,43 @@ defmodule Bank.Ach.LineParser do
     Map.put(line, :byte_offset, line.byte_offset + length)
   end
 
-  defp maybe_cast!(value, type, true) do
-    cast!(value, type)
+  defp maybe_cast!(value, type, requirement, true) do
+    cast!(value, type, requirement)
   end
 
-  defp maybe_cast!(value, _type, _should_cast) do
+  defp maybe_cast!(value, _type, _requirement, _should_cast) do
     value
   end
 
-  def cast!(value, :blank) do
+  def cast!(value, :blank, _requirement) do
     value
   end
 
-  def cast!(value, :routing_number) do
+  def cast!(value, :routing_number, _requirement) do
     value
   end
 
-  def cast!(value, :padded_routing_number) do
+  def cast!(value, :padded_routing_number, _requirement) do
     value
   end
 
-  def cast!(value, :upper_az_numeric_09) do
+  def cast!(value, :upper_az_numeric_09, _requirement) do
     value
   end
 
-  def cast!(value, :alphameric) do
+  def cast!(value, :alphameric, _requirement) do
     value
   end
 
-  def cast!(value, :amount_in_cents) do
+  def cast!(value, :amount_in_cents, _requirement) do
     String.to_integer(value)
   end
 
-  def cast!(value, :numeric) do
+  def cast!(value, :numeric, _requirement) do
     String.to_integer(value)
   end
 
-  def cast!(value, :yymmdd) do
+  def cast!(value, :yymmdd, _requirement) do
     Date.new!(
       2000 + String.to_integer(String.slice(value, 0, 2)),
       String.to_integer(String.slice(value, 2, 2)),
@@ -101,11 +101,15 @@ defmodule Bank.Ach.LineParser do
     )
   end
 
-  def cast!(value, :hhmm) do
+  def cast!(value, :hhmm, _requirement) do
     Time.new!(
       String.to_integer(String.slice(value, 0, 2)),
       String.to_integer(String.slice(value, 2, 2)),
       0
     )
+  end
+
+  def cast!(value, exact, _requirement) when is_binary(exact) do
+    value
   end
 end
