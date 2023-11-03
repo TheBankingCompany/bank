@@ -1,10 +1,10 @@
-defmodule Bank.Ach.FileParser.FileHeader do
-  use Bank.Ach.FileParser.LineParser
+defmodule Bank.Ach.AdvFileHeader do
+  use Bank.Ach.LineParser
 
-  @impl Bank.Ach.FileParser.LineParser
+  @impl Bank.Ach.LineParser
   def parse!(text, line_number, opts) do
     new!(text, line_number, opts)
-    |> put(:record_type, :file_header)
+    |> put(:record_type, :adv_file_header)
     |> field!(:record_type_code, 1, "1")
     |> field!(:priority_code, 2, :numeric)
     |> field!(:immediate_destination, 10, :padded_routing_number)

@@ -1,7 +1,7 @@
-defmodule Bank.Ach.FileParser.AdvBatchControl do
-  use Bank.Ach.FileParser.LineParser
+defmodule Bank.Ach.AdvBatchControl do
+  use Bank.Ach.LineParser
 
-  @impl Bank.Ach.FileParser.LineParser
+  @impl Bank.Ach.LineParser
   def parse!(text, line_number, opts) do
     new!(text, line_number, opts)
     |> put(:record_type, :adv_batch_control)

@@ -1,20 +1,20 @@
-defmodule Bank.Ach.FileParser.LineParser do
+defmodule Bank.Ach.LineParser do
   defmacro __using__([]) do
     quote do
       import unquote(__MODULE__)
       @behaviour unquote(__MODULE__)
 
-      @impl Bank.Ach.FileParser.LineParser
+      @impl Bank.Ach.LineParser
       def parse!(text) do
         parse!(text, 1, [])
       end
 
-      @impl Bank.Ach.FileParser.LineParser
+      @impl Bank.Ach.LineParser
       def parse!(text, line_number) when is_integer(line_number) do
         parse!(text, line_number, [])
       end
 
-      @impl Bank.Ach.FileParser.LineParser
+      @impl Bank.Ach.LineParser
       def parse!(text, opts) when is_list(opts) do
         parse!(text, 1, opts)
       end
