@@ -117,6 +117,14 @@ defmodule Bank.Ach.LineParser do
     )
   end
 
+  def cast!(value, :hhmmss, _requirement) do
+    Time.new!(
+      String.to_integer(String.slice(value, 0, 2)),
+      String.to_integer(String.slice(value, 2, 2)),
+      String.to_integer(String.slice(value, 4, 2))
+    )
+  end
+
   def cast!(value, exact, _requirement) when is_binary(exact) do
     value
   end
