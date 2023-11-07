@@ -109,6 +109,25 @@ defmodule Bank.Ach.LineParser do
     )
   end
 
+  def cast!(value, :mmdd, _requirement) do
+    Date.new!(
+      0,
+      String.to_integer(String.slice(value, 0, 2)),
+      String.to_integer(String.slice(value, 2, 2))
+    )
+  end
+
+  def cast!(value, :mmyy, _requirement) do
+    month = String.to_integer(String.slice(value, 0, 2))
+    year = 2000 + String.to_integer(String.slice(value, 2, 2))
+
+    Date.new!(
+      year,
+      month,
+      01
+    )
+  end
+
   def cast!(value, :hhmm, _requirement) do
     Time.new!(
       String.to_integer(String.slice(value, 0, 2)),
