@@ -20,10 +20,13 @@ defmodule BankWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", BankWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: BankWeb.Schema, interface: :playground
+
+    forward "/", Absinthe.Plug, schema: BankWeb.Schema
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:bank, :dev_routes) do
